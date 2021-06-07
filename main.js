@@ -8,6 +8,7 @@ let num = function getRandomInt(min, max) {
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min;
 };
+//|| (parseFloat(result) !== parseInt(result)) result > 100 ||  result < 1 |
 
 let bot1 = function() {
     let task = num(1,100);
@@ -17,7 +18,7 @@ let bot1 = function() {
         if (result === null) {
             alert('Game over!');
         } 
-        else if (result > 100 ||  result < 1 || (isNaN(parseFloat(result)) && !isFinite(result))) {
+        else if ( isNaN(parseFloat(result)) || !isFinite(result) || result < 1 || result > 100 || (parseFloat(result) !== parseInt(result))) {
             alert('Введите число от 1 до 100!!');
             bot();
         }
