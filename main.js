@@ -8,7 +8,6 @@ let num = function getRandomInt(min, max) {
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min;
 };
-//|| (parseFloat(result) !== parseInt(result)) result > 100 ||  result < 1 |
 
 let bot1 = function() {
     let task = num(1,100);
