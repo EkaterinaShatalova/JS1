@@ -23,7 +23,7 @@ const bot1 = function() {
         }
         else if  (result < task ) {
             attempt -= 1;
-            if (attempt===0) {
+            if (attempt === 0) {
                 let losing = confirm('Попытки закончились, хотите сыграть еще?');
                 if (losing) {
                     bot1();                   
@@ -39,7 +39,7 @@ const bot1 = function() {
         }
         else if  (result > task ) {
             attempt -= 1;
-            if (attempt===0) {
+            if (attempt === 0) {
                 let losing = confirm('Попытки закончились, хотите сыграть еще?');
                 if (losing) {
                     bot1();                   
