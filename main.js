@@ -2,15 +2,14 @@
 /* jshint node: true */
 'use strict';
 
-
-let num = function getRandomInt(min, max) {
+const num = function getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-let bot1 = function() {
-    let task = num(1,100);
+const bot1 = function() {
+    const task = num(1,100);
     console.log(task);  //см число
     function bot() {
         let result = prompt('Угадай число от 1 до 100');
@@ -29,12 +28,15 @@ let bot1 = function() {
             alert('Загаданное число меньше');
             bot();
         }
-        else {
+        else if (result == task) {
             alert('Поздравляю, вы угадали!');
         }
-    }  
-    bot(); 
-    console.dir(bot); //см замыкание    
+        else {
+            alert('Что-то не так :(');
+        }  
+        console.dir(bot); //см замыкание    
+    }
+    bot();
 };
 
 bot1();
