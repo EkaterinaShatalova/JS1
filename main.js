@@ -21,8 +21,8 @@ const bot1 = function() {
             alert('Введите число от 1 до 100!!');
             bot();
         }
-        else if  (result < task ) {
-            attempt -= 1;
+        else if  (result < task || result > task) {
+            attempt --;
             if (attempt === 0) {
                 let losing = confirm('Попытки закончились, хотите сыграть еще?');
                 if (losing) {
@@ -33,23 +33,7 @@ const bot1 = function() {
                 }
             }
             else {
-                alert(`Загаданное число больше, осталось попыток: ${attempt}`);
-                bot();
-            }
-        }
-        else if  (result > task ) {
-            attempt -= 1;
-            if (attempt === 0) {
-                let losing = confirm('Попытки закончились, хотите сыграть еще?');
-                if (losing) {
-                    bot1();                   
-                }
-                else {
-                    alert('Спасибо за участие!');
-                }
-            }
-            else {
-                alert(`Загаданное число меньше, осталось попыток: ${attempt}`);
+                result < task? alert(`Загаданное число больше, осталось попыток: ${attempt}`) : alert(`Загаданное число меньше, осталось попыток: ${attempt}`)
                 bot();
             }
         }
