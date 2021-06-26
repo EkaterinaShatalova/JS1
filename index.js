@@ -8,7 +8,6 @@ const todoList = document.querySelector('.todo-list');
 const todoCompleted = document.querySelector('.todo-completed');
 
 let todoData = [];
-
 const remove = function() {
     let btnRemove = document.querySelectorAll('.todo-remove');
     Array.from(btnRemove).forEach(item => {
