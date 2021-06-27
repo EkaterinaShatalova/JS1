@@ -2,78 +2,35 @@
 /* jshint node: true */
 'use strict';
 
-const todoControl = document.querySelector('.todo-control');
-const headerInput = document.querySelector('.header-input');
-const todoList = document.querySelector('.todo-list');
-const todoCompleted = document.querySelector('.todo-completed');
-
-let todoData = [];
-const remove = function() {
-    let btnRemove = document.querySelectorAll('.todo-remove');
-    Array.from(btnRemove).forEach(item => {
-    item.addEventListener('click', function(event) {
-        event.preventDefault();
-        todoData.forEach(function(item, i) {
-            if (item.value===event.target.parentNode.parentNode.firstElementChild.textContent) {
-                todoData.splice(i,1);
-                render();
-                localStorage.setItem('task', JSON.stringify(todoData));
-            }
-        });
-    });
-});
+const DomElement = function (selector, height, width, bg, fontSize, innerText) {
+    this.selector = selector;
+    this.height = height;
+    this.width = width;
+    this.bg = bg;
+    this.fontSize = fontSize;
+    this.innerText  = innerText;
 };
 
-const render = function() {
-    todoList.textContent = '';
-    todoCompleted.textContent = '';
-    todoData.forEach(function(item) {
-        let li = document.createElement('li');
-        li.classList.add('todo-item');
-        li.innerHTML = `<span class="text-todo">${item.value}</span>
-        <div class="todo-buttons"><button class="todo-remove">
-        </button><button class="todo-complete"></button></div>`;
+DomElement.prototype.creator = function() {
+    if(this.selector.startsWith('.')) {
+        const elem = document.createElement('div');
+        elem.classList.add(this.selector.substr(1));
+        elem.style.cssText = `height: ${this.height}; width: ${this.width}; background: ${this.bg}; font-size: ${this.fontSize}`;
+        elem.innerText = this.innerText;
+        document.body.append(elem);
 
-        const btnCompleted = li.querySelector('.todo-complete');
-        btnCompleted.addEventListener('click', function() {
-            item.completed = !item.completed;
-            localStorage.setItem('task', JSON.stringify(todoData));
-            render();
-        });
-        if(item.completed) {
-            todoCompleted.append(li);
-        } else {
-            todoList.append(li);
-        }
-    });
-    remove();
-};
-
-if (localStorage.getItem('task')) {
-    todoData = JSON.parse(localStorage.getItem('task'));
-    render();
-};
-
-todoControl.addEventListener('submit', event => {
-    event.preventDefault();
-    if(headerInput.value.trim() === '') {
-        headerInput.value = '';
-        return;
-    } else {
-        const newTodo = {
-            value: headerInput.value,
-            completed: false
-        };
-        todoData.push(newTodo);
-        render();  
-        localStorage.setItem('task', JSON.stringify(todoData));   
-        headerInput.value = '';
+    } else if (this.selector.startsWith('#')) {
+        const elem = document.createElement('p');
+        elem.id = this.selector.substr(1);
+        elem.style.cssText = `height: ${this.height}; width: ${this.width}; background: ${this.bg}; font-size: ${this.fontSize}`;
+        elem.innerText = this.innerText;
+        document.body.append(elem);
     }
-});
+};
 
+//пример
+const b2 = new DomElement('.input',  '30px', '300px', 'yellow', '25px', 'Привет');
+const b3 = new DomElement('#input', '30px', '300px', 'orange', '25px', 'Пока');
 
-
-
-
-
-
+b2.creator();
+b3.creator();
