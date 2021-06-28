@@ -8,21 +8,6 @@ const todoList = document.querySelector('.todo-list');
 const todoCompleted = document.querySelector('.todo-completed');
 
 let todoData = [];
-const remove = function() {
-    let btnRemove = document.querySelectorAll('.todo-remove');
-    Array.from(btnRemove).forEach(item => {
-    item.addEventListener('click', function(event) {
-        event.preventDefault();
-        todoData.forEach(function(item, i) {
-            if (item.value===event.target.parentNode.parentNode.firstElementChild.textContent) {
-                todoData.splice(i,1);
-                render();
-                localStorage.setItem('task', JSON.stringify(todoData));
-            }
-        });
-    });
-});
-};
 
 const render = function() {
     todoList.textContent = '';
@@ -45,8 +30,13 @@ const render = function() {
         } else {
             todoList.append(li);
         }
+        const btnRemove = li.querySelector('.todo-remove');
+        btnRemove.addEventListener('click', function() {
+            todoData.splice(todoData.indexOf(item), 1);
+            localStorage.setItem('task', JSON.stringify(todoData));
+            render();
+        });
     });
-    remove();
 };
 
 if (localStorage.getItem('task')) {
