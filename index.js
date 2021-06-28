@@ -12,16 +12,10 @@ const DomElement = function (selector, height, width, bg, fontSize, innerText) {
 };
 
 DomElement.prototype.creator = function() {
-    if(this.selector.startsWith('.')) {
-        const elem = document.createElement('div');
-        elem.classList.add(this.selector.substr(1));
-        elem.style.cssText = `height: ${this.height}; width: ${this.width}; background: ${this.bg}; font-size: ${this.fontSize}`;
-        elem.innerText = this.innerText;
-        document.body.append(elem);
 
-    } else if (this.selector.startsWith('#')) {
-        const elem = document.createElement('p');
-        elem.id = this.selector.substr(1);
+    if(this.selector.startsWith('.') || this.selector.startsWith('#') ) {
+        const elem = this.selector.startsWith('.') ? document.createElement('div') : document.createElement('p');
+        this.selector.startsWith('.') ? elem.classList.add(this.selector.substr(1)): elem.id = this.selector.substr(1);
         elem.style.cssText = `height: ${this.height}; width: ${this.width}; background: ${this.bg}; font-size: ${this.fontSize}`;
         elem.innerText = this.innerText;
         document.body.append(elem);
@@ -30,7 +24,9 @@ DomElement.prototype.creator = function() {
 
 //пример
 const b2 = new DomElement('.input',  '30px', '300px', 'yellow', '25px', 'Привет');
-const b3 = new DomElement('#input', '30px', '300px', 'orange', '25px', 'Пока');
+const b3 = new DomElement('#input111', '30px', '300px', 'orange', '25px', 'Пока');
 
 b2.creator();
 b3.creator();
+
+
