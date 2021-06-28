@@ -2,68 +2,23 @@
 /* jshint node: true */
 'use strict';
 
-const todoControl = document.querySelector('.todo-control');
-const headerInput = document.querySelector('.header-input');
-const todoList = document.querySelector('.todo-list');
-const todoCompleted = document.querySelector('.todo-completed');
-
-let todoData = [];
-
-const render = function() {
-    todoList.textContent = '';
-    todoCompleted.textContent = '';
-    todoData.forEach(function(item) {
-        let li = document.createElement('li');
-        li.classList.add('todo-item');
-        li.innerHTML = `<span class="text-todo">${item.value}</span>
-        <div class="todo-buttons"><button class="todo-remove">
-        </button><button class="todo-complete"></button></div>`;
-
-        const btnCompleted = li.querySelector('.todo-complete');
-        btnCompleted.addEventListener('click', function() {
-            item.completed = !item.completed;
-            localStorage.setItem('task', JSON.stringify(todoData));
-            render();
-        });
-        if(item.completed) {
-            todoCompleted.append(li);
-        } else {
-            todoList.append(li);
-        }
-        const btnRemove = li.querySelector('.todo-remove');
-        btnRemove.addEventListener('click', function() {
-            todoData.splice(todoData.indexOf(item), 1);
-            localStorage.setItem('task', JSON.stringify(todoData));
-            render();
-        });
-    });
-};
-
-if (localStorage.getItem('task')) {
-    todoData = JSON.parse(localStorage.getItem('task'));
-    render();
-};
-
-todoControl.addEventListener('submit', event => {
-    event.preventDefault();
-    if(headerInput.value.trim() === '') {
-        headerInput.value = '';
-        return;
-    } else {
-        const newTodo = {
-            value: headerInput.value,
-            completed: false
-        };
-        todoData.push(newTodo);
-        render();  
-        localStorage.setItem('task', JSON.stringify(todoData));   
-        headerInput.value = '';
+function get_random_color() 
+{
+    let color = "";
+    for(let i = 0; i < 3; i++) {
+        const sub = Math.floor(Math.random() * 256).toString(16);
+        console.log(sub);
+        color += (sub.length == 1 ? "0" + sub : sub);
+        console.log(color);
     }
+    return "#" + color;
+}
+
+const btn = document.getElementById('add');
+const color = document.getElementById('color')
+
+btn.addEventListener('click', ()=> {
+    document.body.style.background = get_random_color();
+    color.innerText = get_random_color();
 });
-
-
-
-
-
-
 
