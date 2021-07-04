@@ -3,7 +3,8 @@
 
 let count = 0;
 const img = document.querySelector('img');
-const btn = document.querySelector('button');
+const btnGo = document.querySelector('#btn1');
+const btnReset = document.querySelector('#btn2');
 let flyInterval;
 
 const flyAnimate = function() {
@@ -14,12 +15,12 @@ const flyAnimate = function() {
     }
     else {
         count = 0;
-        img.style.left = count * 3 + 'px'
+        img.style.left = count * 3 + 'px';
     }
 };
 
 let animate = false;
-btn.addEventListener('click', () => {
+btnGo.addEventListener('click', () => {
     if(!animate) {
         flyInterval = requestAnimationFrame(flyAnimate);
         animate = true;
@@ -30,3 +31,6 @@ btn.addEventListener('click', () => {
     }
 });
 
+btnReset.addEventListener('click', () => {
+    img.style.left = 0;
+});
