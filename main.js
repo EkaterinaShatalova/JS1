@@ -25,9 +25,6 @@ const date = new Date();
 // );
 const a = ['02', '03', '04', '22', '23']
 
-
-
-    
 const timeEnding = function() {
     let ending;
     if(a.includes(date.toLocaleString('ru', {hour: 'numeric'})) ) {
@@ -52,25 +49,27 @@ const zeroBegin = function(elem) {
 };
 
 
-const timerId = function() {setInterval(function() {
-    
-    const time1 = document.createElement('p');
+const timerId = function() {
+    setInterval(function() {
+    document.body.innerText = '';
+
+    let time1 = document.createElement('p');
     time1.innerText = 'Сегодня ' + date.toLocaleString('ru', {weekday: 'long'}).toUpperCase()[0] + date.toLocaleString('ru', {weekday: 'long'}).toLowerCase().substr(1) +', '+ 
     date.toLocaleString('ru', {day: 'numeric'}) + ' ' +
     date.toLocaleString('ru', {month: 'long'}) + ' ' + date.toLocaleString('ru', {year: 'numeric'}) + ' года, ' + 
     date.toLocaleString('ru', {hour: 'numeric'}) + ' ' +timeEnding() + ' '+ date.toLocaleString('ru', {minute: 'numeric'}) + ' минут ' +
     date.toLocaleString('ru', {second: 'numeric'}) + ' секунд';
+
     document.body.append(time1);
-
-    const time2 = document.createElement('p');
-    time2.innerText = zeroBegin(date.toLocaleString('ru', {day: '2-digit'})) + '.' +
-    zeroBegin(date.toLocaleString('ru', {month: '2-digit'})) + '.' + date.toLocaleString('ru', {year: 'numeric'}) + ' - ' + 
-    zeroBegin(date.toLocaleString('ru', {hour: '2-digit'})) + ':'+ zeroBegin(date.toLocaleString('ru', {minute: '2-digit'})) + ':' + 
-    zeroBegin(date.toLocaleString('ru', {second: '2-digit'}));
-    document.body.append(time2);
-
     console.log(time1);
-    console.log(time2);
+
+    // const time2 = document.createElement('p');
+    // time2.innerText = zeroBegin(date.toLocaleString('ru', {day: '2-digit'})) + '.' +
+    // zeroBegin(date.toLocaleString('ru', {month: '2-digit'})) + '.' + date.toLocaleString('ru', {year: 'numeric'}) + ' - ' + 
+    // zeroBegin(date.toLocaleString('ru', {hour: '2-digit'})) + ':'+ zeroBegin(date.toLocaleString('ru', {minute: '2-digit'})) + ':' + 
+    // zeroBegin(date.toLocaleString('ru', {second: '2-digit'}));
+    // document.body.append(time2);
+    // console.log(time2);
 
 // console.log('Сегодня ' + date.toLocaleString('ru', {weekday: 'long'}).toUpperCase()[0] + date.toLocaleString('ru', {weekday: 'long'}).toLowerCase().substr(1) +', '+ 
 // date.toLocaleString('ru', {day: 'numeric'}) + ' ' +
@@ -82,10 +81,10 @@ const timerId = function() {setInterval(function() {
 // zeroBegin(date.toLocaleString('ru', {month: '2-digit'})) + '.' + date.toLocaleString('ru', {year: 'numeric'}) + ' - ' + 
 // zeroBegin(date.toLocaleString('ru', {hour: '2-digit'})) + ':'+ zeroBegin(date.toLocaleString('ru', {minute: '2-digit'})) + ':' + 
 // zeroBegin(date.toLocaleString('ru', {second: '2-digit'})));
-}, 1000);
+}, 5000);
 };
 
-// timerId();
+timerId();
 
 
 
