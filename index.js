@@ -33,4 +33,5 @@ btnGo.addEventListener('click', () => {
 
 btnReset.addEventListener('click', () => {
     img.style.left = 0;
+    count = 0;
 });
